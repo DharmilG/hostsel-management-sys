@@ -7,9 +7,10 @@ const createComplaint = async (data) => {
       title,
       description,
       category,
+      severity,
       status
     )
-    VALUES ($1,$2,$3,$4,$5)
+      VALUES ($1,$2,$3,$4,$5,$6)
     RETURNING *
   `
   const values = [
@@ -17,7 +18,8 @@ const createComplaint = async (data) => {
     data.title,
     data.description,
     data.category,
-    data.status || "pending"
+      data.severity || 3,
+      data.status || "pending"
   ]
   const { rows } = await pool.query(query, values)
   return rows[0]

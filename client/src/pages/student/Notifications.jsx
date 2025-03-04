@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Bell } from "lucide-react"
 import DashboardLayout from "../../components/DashboardLayout"
+import Button from "../../components/Button"
 import { getNotificationsByStudent, markNotificationRead } from "../../api/notificationApi"
 import { useAuth } from "../../context/AuthContext"
 
@@ -48,12 +49,14 @@ const Notifications = () => {
               <div className="flex items-center justify-between">
                 <p className="text-slate-700">{n.message}</p>
                 {!n.is_read && (
-                  <button
+                  <Button
                     onClick={() => markRead(n.id)}
-                    className="text-slate-500 hover:bg-white/50 hover:text-slate-900 rounded-xl transition-colors px-3 py-1 text-sm"
+                    variant="ghost"
+                    size="sm"
+                    className="text-slate-500 hover:bg-white/50 hover:text-slate-900 px-3 py-1 text-sm"
                   >
                     Mark Read
-                  </button>
+                  </Button>
                 )}
               </div>
             </div>

@@ -1,16 +1,6 @@
-import axios from "axios"
+import { createAPI } from "./fetchClient"
 
-const API = axios.create({
-  baseURL: (import.meta.env.VITE_API_URL || "") + "/api/attendance"
-})
-
-API.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token")
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
-  }
-  return config
-})
+const API = createAPI("/api/attendance")
 
 export const markAttendance = async (data) => {
   const res = await API.post("/", data)

@@ -9,9 +9,15 @@ const AttendanceReport = () => {
 
   useEffect(() => {
     const fetchAttendance = async () => {
-      const res = await getAllAttendance()
-      setAttendance(res.data)
-      setLoading(false)
+      try {
+        const res = await getAllAttendance()
+        setAttendance(res.data || [])
+      } catch (error) {
+        console.error("Failed to fetch attendance:", error)
+        setAttendance([])
+      } finally {
+        setLoading(false)
+      }
     }
     fetchAttendance()
   }, [])

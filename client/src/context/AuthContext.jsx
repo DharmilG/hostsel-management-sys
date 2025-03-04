@@ -15,6 +15,15 @@ export const AuthProvider = ({ children }) => {
     setUser(user)
     localStorage.setItem("token", token)
     localStorage.setItem("user", JSON.stringify(user))
+    try {
+      const last = {
+        method: user?.lastLoginMethod || "password",
+        at: user?.lastLoginAt || new Date().toISOString(),
+      }
+      localStorage.setItem("lastLoginInfo", JSON.stringify(last))
+    } catch (e) {
+      // ignore storage errors
+    }
   }
 
   const logout = () => {

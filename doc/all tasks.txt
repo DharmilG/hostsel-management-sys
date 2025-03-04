@@ -1,0 +1,16 @@
+D Shift Scheduling & Roster Management: create and publish weekly/monthly shift rosters, allow shift swaps and self-service availability, and export or sync shifts to calendars (Google Calendar).
+D Attendance & Clock-in/Clock-out: device-based clocking (QR/PIN/button) with per-device logs, timesheet generation, and payroll export.
+D Leave & Permission Requests: staff submit leave/permission from device; admin reviews, approves/denies, and the roster/coverage adjusts automatically.
+D Tasks & Checklists: create recurring or one-off tasks (cleaning, mess prep), assign to staff or device, attach photos on completion, and mark verification.
+D Maintenance & Repair Tickets: students or staff open repair tickets, attach photos, assign maintenance staff, set priority and track completion.
+D Announcements & Broadcasts: staff/admin create targeted announcements (students, staff, floors), with optional admin approval and scheduling.
+D Incident & Security Reporting: security staff record incidents with severity, location, and multimedia evidence; enable escalation to admin.
+D Inventory & Mess Management: manage stock levels for mess/kitchen, record consumption, notify for low-stock, and handle purchase requests.
+D Staff Directory & Profiles: structured staff profiles (role, assigned area, contact info, certifications) visible to students and admins per privacy settings.
+D Shift Coverage Alerts & Analytics: real-time alerts for understaffed shifts and dashboards with coverage, attendance, incidents, and operational KPIs.
+D Task Verification (QR Proof): place QR tags in zones or rooms; staff scan to verify task completion and create an auditable trail.
+D Internal Chat / Messaging: staff-only channels for quick coordination and targeted messages per role or area.
+D Reports & Exports: CSV/PDF exports for attendance, payroll, maintenance logs, incidents, and inventory reports.
+- Integrations: Google Calendar sync for shifts/events; optional SMS/email gateways for escalations and reminders.
+- RBAC & Audit Logs: define roles (admin, staff sub-roles), permissions, and store audit logs for critical actions and approvals.
+- Mobile/PWA & Offline Support: build mobile-first interfaces or PWA with offline queues so staff can use devices with intermittent connectivity.
