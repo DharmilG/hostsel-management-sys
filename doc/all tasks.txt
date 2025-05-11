@@ -2,7 +2,7 @@ D Shift Scheduling & Roster Management: create and publish weekly/monthly shift 
 D Attendance & Clock-in/Clock-out: device-based clocking (QR/PIN/button) with per-device logs, timesheet generation, and payroll export.
 D Leave & Permission Requests: staff submit leave/permission from device; admin reviews, approves/denies, and the roster/coverage adjusts automatically.
 D Tasks & Checklists: create recurring or one-off tasks (cleaning, mess prep), assign to staff or device, attach photos on completion, and mark verification.
-- Maintenance & Repair Tickets: students or staff open repair tickets, attach photos, assign maintenance staff, set priority and track completion.
+D Maintenance & Repair Tickets: students or staff open repair tickets, attach photos, assign maintenance staff, set priority and track completion.
 - Announcements & Broadcasts: staff/admin create targeted announcements (students, staff, floors), with optional admin approval and scheduling.
 - Incident & Security Reporting: security staff record incidents with severity, location, and multimedia evidence; enable escalation to admin.
 - Inventory & Mess Management: manage stock levels for mess/kitchen, record consumption, notify for low-stock, and handle purchase requests.

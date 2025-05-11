@@ -1,5 +1,6 @@
 const express = require("express")
 const cors = require("cors")
+const path = require("path")
 const authRouter = require("./routes/authRouter")
 const studentRouter = require("./routes/studentRouter")
 const roomRouter = require("./routes/roomRouter")
@@ -14,6 +15,9 @@ const clockRouter = require("./routes/clockRouter")
 const taskRouter = require("./routes/taskRouter")
 const roomAllocationRouter = require("./routes/roomAllocationRouter")
 const staffLeaveRouter = require("./routes/staffLeaveRouter")
+const uploadRouter = require("./routes/uploadRouter")
+const maintenanceRouter = require("./routes/maintenanceRouter")
+const userRouter = require("./routes/userRouter")
 require("dotenv").config()
 
 const app = express()
@@ -27,6 +31,10 @@ app.use(
 
 app.use(express.json({ limit: "10mb" }))
 app.use(express.urlencoded({ extended: true }))
+
+// Serve uploaded files as static assets (no auth needed for already-known URLs)
+// For auth-gated serving, use GET /api/uploads/:filename instead
+app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")))
 
 app.use((req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`)
@@ -51,6 +59,9 @@ app.use("/api/clock", clockRouter)
 app.use("/api/tasks", taskRouter)
 app.use("/api/room-allocations", roomAllocationRouter)
 app.use("/api/staff/leave-requests", staffLeaveRouter)
+app.use("/api/uploads", uploadRouter)
+app.use("/api/maintenance", maintenanceRouter)
+app.use("/api/users", userRouter)
 
 
 app.use((req, res, next) => {

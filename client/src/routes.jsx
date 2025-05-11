@@ -27,7 +27,10 @@ import StaffDashboard from "./pages/staff/Dashboard"
 import StaffClock from "./pages/staff/Clock"
 import LeaveRequests from "./pages/staff/LeaveRequests"
 import StaffTasks from "./pages/staff/Tasks"
+import StaffMaintenance from "./pages/staff/Maintenance"
 import LeaveAdmin from "./pages/admin/LeaveAdmin"
+import AdminMaintenance from "./pages/admin/Maintenance"
+import StudentMaintenance from "./pages/student/Maintenance"
 
 const AppRoutes = () => {
   return (
@@ -47,6 +50,7 @@ const AppRoutes = () => {
           <Route path="/admin/fees" element={<FeeManagement />} />
           <Route path="/admin/announcements" element={<Announcements />} />
           <Route path="/admin/leave-requests" element={<LeaveAdmin />} />
+          <Route path="/admin/maintenance" element={<AdminMaintenance />} />
           <Route path="/admin/timesheets" element={<Timesheets />} />
           <Route path="/admin/payroll" element={<PayrollExports />} />
           <Route path="/admin/tasks" element={<TaskAdmin />} />
@@ -56,6 +60,7 @@ const AppRoutes = () => {
           <Route path="/student" element={<StudentDashboard />} />
           <Route path="/student/attendance" element={<Attendance />} />
           <Route path="/student/complaints" element={<StudentComplaints />} />
+          <Route path="/student/maintenance" element={<StudentMaintenance />} />
           <Route path="/student/fees" element={<Fees />} />
           <Route path="/student/notifications" element={<Notifications />} />
           <Route path="/student/announcements" element={<StudentAnnouncements />} />
@@ -65,6 +70,7 @@ const AppRoutes = () => {
           <Route path="/staff" element={<StaffDashboard />} />
           <Route path="/staff/clock" element={<StaffClock />} />
           <Route path="/staff/tasks" element={<StaffTasks />} />
+          <Route path="/staff/maintenance" element={<StaffMaintenance />} />
           <Route path="/staff/leave-requests" element={<LeaveRequests />} />
         </Route>
       </Routes>

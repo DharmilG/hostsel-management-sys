@@ -20,6 +20,8 @@
   --color-success: #10B981;
   --color-danger: #EF4444;
   --color-excused: #FFB591;
+  --color-warning: #F59E0B;
+  --color-info: #3B82F6;
 
   /* Text */
   --text-primary: #111827;
@@ -33,6 +35,7 @@
 
   /* UI primitives */
   --ui-ink: #1a1a1a;
+  --button-black: #0f172a;
 
   /* Decorative accents */
   --accent-warm: #FFDEE9;
@@ -51,9 +54,53 @@
   --google-yellow: #F4B400;
   --google-red: #EA4335;
 
+  /* ─── Spacing scale ─────────────────────────────── */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* ─── Border radii ──────────────────────────────── */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* ─── Elevation (shadows) ───────────────────────── */
+  --elevation-0: none;
+  --elevation-1: 0 1px 2px rgba(16,24,40,0.04);
+  --elevation-2: 0 6px 18px rgba(16,24,40,0.06);
+  --elevation-3: 0 12px 32px rgba(16,24,40,0.10);
+  --elevation-4: 0 24px 48px rgba(16,24,40,0.14);
+
+  /* ─── Motion ────────────────────────────────────── */
+  --motion-duration-fast: 150ms;
+  --motion-duration-medium: 300ms;
+  --motion-duration-slow: 500ms;
+  --motion-easing: cubic-bezier(.2,.8,.2,1);
+  --motion-easing-in: cubic-bezier(.4,0,1,1);
+  --motion-easing-out: cubic-bezier(0,0,.2,1);
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+}
+
+/* ─── Palette variants ──────────────────────────────────── */
+.theme-admin {
+  --color-primary: #7C3AED;
+  --color-primary-2: #A78BFA;
+}
+.theme-student {
+  --color-primary: #A78BFA;
+  --color-primary-2: #C9B8FF;
 }
 
 body {
