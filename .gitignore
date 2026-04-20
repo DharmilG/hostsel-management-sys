@@ -10,3 +10,13 @@
 
 # Vercel
 .vercel
+
+# Ignore plain text files
+*.txt
+
+# Ignore markdown files
+*.md
+*.markdown
+
+# Ignore SQL files
+*.sql
