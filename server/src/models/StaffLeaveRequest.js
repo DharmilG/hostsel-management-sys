@@ -1,11 +1,22 @@
 const pool = require("../config/db")
 
+// Helper: ensure attachments is always a valid JS array before storing
+const normaliseAttachments = (attachments) => {
+  if (!attachments) return []
+  if (Array.isArray(attachments)) return attachments
+  if (typeof attachments === "string") {
+    try { return JSON.parse(attachments) } catch { return [] }
+  }
+  return []
+}
+
 const createLeaveRequest = async (data) => {
   const query = `
     INSERT INTO staff_leave_requests (
       staff_id, leave_type, start_time, end_time, partial, partial_start_time, partial_end_time, reason, attachments, status, requested_via, requested_by_device_id
-    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING *
+    ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9::jsonb,$10,$11,$12) RETURNING *
   `
+  const attachments = normaliseAttachments(data.attachments)
   const values = [
     data.staff_id,
     data.leave_type,
@@ -15,7 +26,7 @@ const createLeaveRequest = async (data) => {
     data.partial_start_time || null,
     data.partial_end_time || null,
     data.reason || null,
-    data.attachments || [],
+    JSON.stringify(attachments),
     data.status || "pending",
     data.requested_via || null,
     data.requested_by_device_id || null

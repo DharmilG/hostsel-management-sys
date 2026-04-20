@@ -20,3 +20,7 @@
 
 # Ignore SQL files
 *.sql
+
+# User-uploaded files (stored locally, not tracked in git)
+server/uploads/*
+!server/uploads/.gitkeep

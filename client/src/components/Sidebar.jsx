@@ -7,8 +7,9 @@ import {
   Wallet,
   Bell,
   FileText,
-  DollarSign
-  ,ClipboardCheck
+  DollarSign,
+  ClipboardCheck,
+  Wrench
 } from "lucide-react"
 import { useAuth } from "../context/AuthContext"
 
@@ -20,6 +21,7 @@ const Sidebar = () => {
     { to: "/admin/students", label: "Students", icon: Users },
     { to: "/admin/rooms", label: "Rooms", icon: BedDouble },
     { to: "/admin/complaints", label: "Complaints", icon: ClipboardList },
+    { to: "/admin/maintenance", label: "Maintenance", icon: Wrench },
     { to: "/admin/fees", label: "Fees", icon: Wallet },
     { to: "/admin/announcements", label: "Announcements", icon: Bell },
     { to: "/admin/leave-requests", label: "Leave Requests", icon: FileText },
@@ -32,14 +34,16 @@ const Sidebar = () => {
     { to: "/student", label: "Dashboard", icon: LayoutDashboard, end: true },
     { to: "/student/attendance", label: "Attendance", icon: ClipboardList },
     { to: "/student/complaints", label: "Complaints", icon: ClipboardList },
+    { to: "/student/maintenance", label: "Maintenance", icon: Wrench },
     { to: "/student/fees", label: "Fees", icon: Wallet },
     { to: "/student/notifications", label: "Notifications", icon: Bell }
   ]
 
   const staffLinks = [
     { to: "/staff", label: "Profile", icon: LayoutDashboard, end: true },
-    { to: "/staff/tasks", label: "Tasks", icon: ClipboardCheck }
-    ,{ to: "/staff/leave-requests", label: "Leave Requests", icon: ClipboardList }
+    { to: "/staff/tasks", label: "Tasks", icon: ClipboardCheck },
+    { to: "/staff/maintenance", label: "Maintenance", icon: Wrench },
+    { to: "/staff/leave-requests", label: "Leave Requests", icon: ClipboardList }
   ]
 
   const links = user?.role === "admin" ? adminLinks : (user?.role === "staff" ? staffLinks : studentLinks)
