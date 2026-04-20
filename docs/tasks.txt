@@ -1,0 +1,74 @@
+4. Attendance trend chart
+- Create `AttendanceTrendChart` (area/line) with stacked series (present, absent, excused). Wire to `GET /api/attendance/trend`.
+
+5. Donut/Gauge & Summary widgets
+- `PresentDonut` to show present/absent/excused and a `StaffCoverageCard` with staffed vs required counts.
+
+6. Attendance heatmap / availability
+- Heatmap component showing hour×day attendance density. Useful for identifying recurring problem windows.
+
+7. Roster / Attendance table
+- Implement `AttendanceTable` with student rows, daily status cells (green/red/dash), search, and inline bulk actions (mark excused, message). Add sparklines per row for 14-day trend.
+
+8. Student slide-over detail
+- Clicking a student opens `StudentDetailDrawer` showing profile, attendance history, leaves, tickets and audit trail.
+
+9. Alerts & incidents feed
+- `CoverageAlertsPanel` showing active coverage alerts (link to coverage page) and recent incidents affecting attendance.
+
+10. Exports & scheduling
+- Add Export button for CSV/PDF of current filtered view and a scheduled reports panel (uses export_jobs API).
+
+11. Realtime updates
+- Wire websocket updates for live attendance events, alert creation, and message counters (Socket.io or WebSocket bridge).
+
+12. Accessibility & responsive polish
+- Ensure keyboard navigation, color contrast, and ARIA labels for charts and table.
+
+
+## Student Dashboard — Suggested content & priority
+
+Purpose
+- Student-facing dashboard should be focused, lightweight, and actionable: quick view of today's attendance, upcoming shifts/allocations (if staff), announcements for students, personal tasks or mess menu, and easy access to raise tickets or contact staff.
+
+Priority widgets (order: highest to lowest)
+1. Today's Attendance Summary
+ - Present/Absent indicator for the student's class/room (if applicable) and quick toggle to view full class roster.
+
+**UI consistency record (core UI changes log)**
+- Use this space to record any changes made to core UI tokens, Tailwind mappings, or shared layout primitives caused by Student Dashboard work. For each change include: file path, diff summary, and rationale. Leave blank if none.
+
+2. My Schedule / Next Shift (for staff-students or student workers)
+ - Next shift or duty, location, and countdown timer.
+3. Announcements / Urgent Banner
+ - Top announcements targeted to the student (in-app banners for urgent items).
+4. Quick Actions
+ - Request Leave, Report Issue, View Mess Menu, Contact Warden/Staff.
+5. Attendance History mini sparkline
+ - Compact 14/30-day sparkline showing personal presence rate.
+6. Tasks & Fees Snapshot
+ - Upcoming tasks assigned to student devices and pending fee reminders.
+7. Notifications & Messages
+ - Recent messages from staff/admin and unread counts.
+8. Events / Calendar
+ - Upcoming events (exam, meeting) synced from roster or external calendar.
+
+Layout & flow
+- Top row: large greeting + today's attendance summary + quick actions (left-to-right).
+- Middle row: two-column — left: announcements & events list; right: schedule + tasks card (two stacked cards).
+- Bottom: attendance history and messages section in a single row (two smaller cards side-by-side).
+
+Color & interaction guidance
+- Maintain the same token palette as admin to match brand. Use lighter variants for student cards and slightly more vibrant call-to-action colors for quick actions.
+- Provide clear affordances for urgent banners (use `--color-danger` for critical messages).
+
+Permissions & data
+- Student dashboard views limited data to the student and public fields (respect `visibility` tokens). Do not expose other students' personal contact info.
+
+Accessibility & mobile-first
+- Prioritise mobile layout with stacked cards and a single-column flow for smaller screens. Ensure primary quick actions are reachable.
+
+Testing & performance (place at end)
+- Unit tests: widget rendering and filter behavior.
+- Integration tests: attendance fetch -> card aggregation -> action flows (leave request, report issue).
+- Load tests: ensure dashboard queries scale when many simultaneous students request the same aggregated endpoints.

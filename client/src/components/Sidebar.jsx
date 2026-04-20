@@ -5,7 +5,10 @@ import {
   BedDouble,
   ClipboardList,
   Wallet,
-  Bell
+  Bell,
+  FileText,
+  DollarSign
+  ,ClipboardCheck
 } from "lucide-react"
 import { useAuth } from "../context/AuthContext"
 
@@ -18,7 +21,11 @@ const Sidebar = () => {
     { to: "/admin/rooms", label: "Rooms", icon: BedDouble },
     { to: "/admin/complaints", label: "Complaints", icon: ClipboardList },
     { to: "/admin/fees", label: "Fees", icon: Wallet },
-    { to: "/admin/announcements", label: "Announcements", icon: Bell }
+    { to: "/admin/announcements", label: "Announcements", icon: Bell },
+    { to: "/admin/leave-requests", label: "Leave Requests", icon: FileText },
+    { to: "/admin/timesheets", label: "Timesheets", icon: FileText },
+    { to: "/admin/payroll", label: "Payroll", icon: DollarSign },
+    { to: "/admin/tasks", label: "Tasks", icon: ClipboardCheck }
   ]
 
   const studentLinks = [
@@ -29,7 +36,13 @@ const Sidebar = () => {
     { to: "/student/notifications", label: "Notifications", icon: Bell }
   ]
 
-  const links = user?.role === "admin" ? adminLinks : studentLinks
+  const staffLinks = [
+    { to: "/staff", label: "Profile", icon: LayoutDashboard, end: true },
+    { to: "/staff/tasks", label: "Tasks", icon: ClipboardCheck }
+    ,{ to: "/staff/leave-requests", label: "Leave Requests", icon: ClipboardList }
+  ]
+
+  const links = user?.role === "admin" ? adminLinks : (user?.role === "staff" ? staffLinks : studentLinks)
 
   return (
     <aside className="w-64 bg-white/60 border border-slate-100 rounded-3xl shadow-sm p-6 hover:shadow-md transition-all duration-300">

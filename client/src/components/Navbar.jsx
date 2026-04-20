@@ -20,11 +20,11 @@ const Navbar = () => {
 
       <div className="flex items-center gap-4">
         <span className="text-slate-500 text-sm">
-          {user?.role === "admin" ? "Admin" : "Student"}
+          {user?.role === "admin" ? "Admin" : user?.role === "staff" ? "Staff" : "Student"}
         </span>
         <button
           onClick={handleLogout}
-          className="text-slate-500 hover:bg-white/50 hover:text-slate-900 rounded-xl transition-colors px-3 py-1.5 flex items-center gap-2"
+          className="text-slate-50 hover:bg-white/50 hover:text-slate-900 rounded-xl transition-colors px-3 py-1.5 flex items-center gap-2"
         >
           <LogOut className="w-4 h-4" />
           Logout

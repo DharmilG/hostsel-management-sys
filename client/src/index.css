@@ -2,8 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ✅ The Fix */
 :root {
+  /* Canonical design tokens (theme-aligned) */
+  /* Primary / Brand */
+  --color-primary: #7C3AED;
+  --color-primary-2: #A78BFA;
+  --color-accent: #FF9F43;
+
+  /* Aliases for existing code (gradual migration) */
+  --color-brand: var(--color-primary);
+  --color-brand-hover: var(--color-primary-2);
+  --color-brand-strong: #5B3AC7;
+  --brand-glow: #7C3AED66;
+  --react-glow: #61dafbaa;
+
+  /* Semantic colors */
+  --color-success: #10B981;
+  --color-danger: #EF4444;
+  --color-excused: #FFB591;
+
+  /* Text */
+  --text-primary: #111827;
+  --text-muted: #6B7280;
+  --text-muted-2: #888888;
+
+  /* Backgrounds & surfaces */
+  --bg-page: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-muted: #F9F9F9;
+
+  /* UI primitives */
+  --ui-ink: #1a1a1a;
+
+  /* Decorative accents */
+  --accent-warm: #FFDEE9;
+  --accent-cool: #B5FFFC;
+  --accent-cream: #FFF3E0;
+  --accent-soft: #F7EEF6;
+
+  /* Heatmap ramp */
+  --heatmap-low: #F3F4F6;
+  --heatmap-mid: #C7B3FF;
+  --heatmap-high: var(--color-primary);
+
+  /* Google logo colors (used in auth icons) */
+  --google-blue: #4285F4;
+  --google-green: #34A853;
+  --google-yellow: #F4B400;
+  --google-red: #EA4335;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -15,7 +62,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   width: 100%; /* Ensures body takes full width */
-  background-color: white; /* Or your preferred background */
+  background-color: var(--bg-page);
 }
 
 #root {
@@ -25,19 +72,15 @@ body {
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-brand);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-brand-hover);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -52,12 +95,12 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: var(--ui-ink);
   cursor: pointer;
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-brand);
 }
 button:focus,
 button:focus-visible {
@@ -66,13 +109,83 @@ button:focus-visible {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    /* Light mode overrides */
+    --text-primary: #213547;
+    --bg-page: #ffffff;
+    --bg-surface: #ffffff;
+    --bg-muted: #f9f9f9;
   }
   a:hover {
-    color: #747bff;
+    color: var(--color-brand-strong);
   }
   button {
-    background-color: #f9f9f9;
+    background-color: var(--bg-muted);
   }
 }
+
+/* Small UI animations used across admin UIs */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 360ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+.student-accent {
+  width: 6px;
+  height: 36px;
+  border-radius: 6px;
+  background: var(--color-primary);
+  flex-shrink: 0;
+}
+
+.collapse-transition {
+  transition: max-height 280ms ease, opacity 220ms ease;
+}
+
+/* Suggestions dropdown (paper-like, atmospheric) */
+.suggestion-dropdown {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
+  z-index: 60;
+  background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(250,250,250,0.98));
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(16,24,40,0.08), 0 2px 6px rgba(16,24,40,0.04);
+  border: 1px solid rgba(15,23,42,0.06);
+  padding: 6px;
+  min-width: 220px;
+  max-width: 420px;
+  max-height: 320px;
+  overflow: auto;
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px;
+  border-radius: 10px;
+  transition: background 160ms ease, transform 160ms ease;
+  cursor: pointer;
+}
+.suggestion-item:hover {
+  background: rgba(124,58,237,0.06);
+  transform: translateY(-2px);
+}
+
+.suggestion-item .meta {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+

@@ -1,6 +1,7 @@
 const {
   createStudent,
   getAllStudents,
+  getAllStudentsWithRooms,
   getStudentById,
   updateStudent,
   deleteStudent
@@ -17,7 +18,8 @@ const createStudentHandler = async (req, res, next) => {
 
 const getAllStudentsHandler = async (req, res, next) => {
   try {
-    const students = await getAllStudents()
+    // Use students with latest room allocation (if any)
+    const students = await getAllStudentsWithRooms()
     res.status(200).json({ success: true, data: students })
   } catch (error) {
     next(error)

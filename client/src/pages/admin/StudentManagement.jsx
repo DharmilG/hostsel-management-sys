@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Users, Plus, Trash2 } from "lucide-react"
 import DashboardLayout from "../../components/DashboardLayout"
 import Modal from "../../components/Modal"
+import Button from "../../components/Button"
 import {
   getAllStudents,
   createStudent,
@@ -24,9 +25,15 @@ const StudentManagement = () => {
   })
 
   const fetchStudents = async () => {
-    const res = await getAllStudents()
-    setStudents(res.data)
-    setLoading(false)
+    try {
+      const res = await getAllStudents()
+      setStudents(res.data || [])
+    } catch (error) {
+      console.error("Failed to fetch students:", error)
+      setStudents([])
+    } finally {
+      setLoading(false)
+    }
   }
 
   useEffect(() => {
@@ -35,16 +42,26 @@ const StudentManagement = () => {
 
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this student?")) {
-      await deleteStudent(id)
-      setStudents((prev) => prev.filter((s) => s.id !== id))
+      try {
+        await deleteStudent(id)
+        setStudents((prev) => prev.filter((s) => s.id !== id))
+      } catch (error) {
+        console.error("Failed to delete student:", error)
+        alert("Failed to delete student. Please try again.")
+      }
     }
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await createStudent(form)
-    setStudents((prev) => [res.data, ...prev])
-    setOpen(false)
+    try {
+      const res = await createStudent(form)
+      setStudents((prev) => [res.data, ...prev])
+      setOpen(false)
+    } catch (error) {
+      console.error("Failed to create student:", error)
+      alert("Failed to create student. Please try again.")
+    }
   }
 
   return (
@@ -57,13 +74,10 @@ const StudentManagement = () => {
           </h1>
         </div>
 
-        <button
-          onClick={() => setOpen(true)}
-          className="bg-slate-900 text-white rounded-xl shadow-lg shadow-slate-200 hover:shadow-xl transition-all px-4 py-2 flex items-center gap-2"
-        >
+        <Button onClick={() => setOpen(true)} variant="primary">
           <Plus className="w-4 h-4" />
           Add Student
-        </button>
+        </Button>
       </div>
 
       <div className="bg-white/60 border border-slate-100 rounded-3xl shadow-sm overflow-hidden">
@@ -107,13 +121,15 @@ const StudentManagement = () => {
                     {student.address}
                   </td>
                   <td className="px-6 py-4">
-                    <button
+                    <Button
+                      variant="ghost"
+                      size="sm"
                       onClick={() => handleDelete(student.id)}
-                      className="text-red-500 hover:bg-red-50 hover:text-red-600 rounded-xl transition-colors p-2"
+                      className="text-red-500 hover:bg-red-50 hover:text-red-600 p-2"
                       title="Delete Student"
                     >
                       <Trash2 className="w-4 h-4" />
-                    </button>
+                    </Button>
                   </td>
                 </tr>
               ))
@@ -173,12 +189,7 @@ const StudentManagement = () => {
             onChange={(e) => setForm({ ...form, address: e.target.value })}
           />
 
-          <button
-            type="submit"
-            className="w-full bg-slate-900 text-white rounded-xl shadow-lg shadow-slate-200 hover:shadow-xl transition-all py-2"
-          >
-            Save Student
-          </button>
+          <Button type="submit" variant="primary" className="w-full">Save Student</Button>
         </form>
       </Modal>
     </DashboardLayout>

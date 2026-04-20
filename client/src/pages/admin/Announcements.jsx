@@ -3,6 +3,7 @@ import { Megaphone, Plus } from "lucide-react"
 import DashboardLayout from "../../components/DashboardLayout"
 import { getAllAnnouncements, createAnnouncement } from "../../api/announcementApi"
 import Modal from "../../components/Modal"
+import Button from "../../components/Button"
 
 const Announcements = () => {
   const [announcements, setAnnouncements] = useState([])
@@ -11,17 +12,27 @@ const Announcements = () => {
 
   useEffect(() => {
     const fetchAnnouncements = async () => {
-      const res = await getAllAnnouncements()
-      setAnnouncements(res.data)
+      try {
+        const res = await getAllAnnouncements()
+        setAnnouncements(res.data || [])
+      } catch (error) {
+        console.error("Failed to fetch announcements:", error)
+        setAnnouncements([])
+      }
     }
     fetchAnnouncements()
   }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const res = await createAnnouncement(form)
-    setAnnouncements((prev) => [res.data, ...prev])
-    setOpen(false)
+    try {
+      const res = await createAnnouncement(form)
+      setAnnouncements((prev) => [res.data, ...prev])
+      setOpen(false)
+    } catch (error) {
+      console.error("Failed to create announcement:", error)
+      alert("Failed to create announcement. Please try again.")
+    }
   }
 
   return (
@@ -34,13 +45,10 @@ const Announcements = () => {
           </h1>
         </div>
 
-        <button
-          onClick={() => setOpen(true)}
-          className="bg-slate-900 text-white rounded-xl shadow-lg shadow-slate-200 hover:shadow-xl transition-all px-4 py-2 flex items-center gap-2"
-        >
+        <Button onClick={() => setOpen(true)} variant="primary">
           <Plus className="w-4 h-4" />
           New Announcement
-        </button>
+        </Button>
       </div>
 
       <div className="space-y-4">
@@ -67,12 +75,7 @@ const Announcements = () => {
             className="w-full bg-white/60 border border-slate-200 rounded-2xl px-4 py-2"
             onChange={(e) => setForm({ ...form, message: e.target.value })}
           />
-          <button
-            type="submit"
-            className="w-full bg-slate-900 text-white rounded-xl shadow-lg shadow-slate-200 hover:shadow-xl transition-all py-2"
-          >
-            Publish
-          </button>
+          <Button type="submit" variant="primary" className="w-full">Publish</Button>
         </form>
       </Modal>
     </DashboardLayout>

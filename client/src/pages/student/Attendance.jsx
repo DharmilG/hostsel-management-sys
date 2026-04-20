@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { CalendarCheck } from "lucide-react"
+import Button from "../../components/Button"
 import DashboardLayout from "../../components/DashboardLayout"
 import { getAttendanceByStudent, markAttendance } from "../../api/attendanceApi"
 import { useAuth } from "../../context/AuthContext"
@@ -38,12 +39,7 @@ const Attendance = () => {
           </h1>
         </div>
 
-        <button
-          onClick={markToday}
-          className="bg-slate-900 text-white rounded-xl shadow-lg shadow-slate-200 hover:shadow-xl transition-all px-4 py-2"
-        >
-          Mark Present
-        </button>
+        <Button onClick={markToday} variant="primary">Mark Present</Button>
       </div>
 
       <div className="bg-white/60 border border-slate-100 rounded-3xl shadow-sm overflow-hidden">

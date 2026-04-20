@@ -36,8 +36,31 @@ const getAllStudents = async () => {
   return rows
 }
 
+const getAllStudentsWithRooms = async () => {
+  const query = `
+    SELECT s.*, latest.room_id AS room_id, latest.allocation_id AS allocation_id, latest.allocated_at AS allocated_at, r.room_number, r.block
+    FROM students s
+    LEFT JOIN LATERAL (
+      SELECT ra.id AS allocation_id, ra.room_id, ra.allocated_at
+      FROM room_allocations ra
+      WHERE ra.student_id = s.id
+      ORDER BY ra.allocated_at DESC
+      LIMIT 1
+    ) latest ON true
+    LEFT JOIN rooms r ON r.id = latest.room_id
+    ORDER BY s.id DESC
+  `
+  const { rows } = await pool.query(query)
+  return rows
+}
+
 const getStudentById = async (id) => {
   const { rows } = await pool.query("SELECT * FROM students WHERE id = $1", [id])
+  return rows[0]
+}
+
+const getStudentByUserId = async (user_id) => {
+  const { rows } = await pool.query("SELECT * FROM students WHERE user_id = $1", [user_id])
   return rows[0]
 }
 
@@ -76,7 +99,9 @@ const deleteStudent = async (id) => {
 module.exports = {
   createStudent,
   getAllStudents,
+  getAllStudentsWithRooms,
   getStudentById,
   updateStudent,
+  getStudentByUserId,
   deleteStudent
 }
